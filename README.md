@@ -2,9 +2,10 @@
     <img src="./assets/LogGuard-logo.png" width="67%">
 </h1>
 
----
-
-LogGuard is a lightweight and extensible Python tool designed to analyze and monitor Linux system logs for suspicious authentication activity.
+<p align="center">
+LogGuard is a lightweight, beginner-friendly, and extensible Python tool designed to analyze and monitor Linux authentication logs.  
+Its primary goal is to help identify suspicious login attempts, unauthorized access, and privilege escalation activities such as `sudo` or `su` usage.
+</p>
 
 <p align="center">
   <a href="#description">Description</a> •
