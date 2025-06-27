@@ -11,7 +11,7 @@ Its primary goal is to help identify suspicious login attempts, unauthorized acc
   <a href="#description">Description</a> •
   <a href="#features">Features</a> •
   <a href="#installation">Installation</a> •
-  <a href="#usage">Usage & Demonstration</a>
+  <a href="#usage--demonstration">Usage & Demonstration</a>
 </p>
 
 <br>
