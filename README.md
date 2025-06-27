@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="./assets/LogGuard-logo.png" width="67%">
+    <img src="./assets/LogGuard-logo.png">
 </h1>
 
 <p align="center">
