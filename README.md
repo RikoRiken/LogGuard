@@ -4,14 +4,45 @@
 
 <p align="center">
 LogGuard is a lightweight, beginner-friendly, and extensible Python tool designed to analyze and monitor Linux authentication logs.  
-Its primary goal is to help identify suspicious login attempts, unauthorized access, and privilege escalation activities such as `sudo` or `su` usage.
+Its primary goal is to help identify suspicious login attempts, unauthorized access, and privilege escalation.
 </p>
 
 <p align="center">
   <a href="#description">Description</a> •
   <a href="#features">Features</a> •
   <a href="#installation">Installation</a> •
-  <a href="#usage">Usage</a> •
-  <a href="#demonstration">Demonstration</a>
+  <a href="#usage">Usage & Demonstration</a>
 </p>
 
+<br>
+
+## Description
+
+**LogGuard** is a lightweight, modular, and beginner-friendly Python tool designed to analyze Linux system authentication logs.
+
+Its goal is to help identify suspicious login activity — such as failed SSH attempts, unauthorized access, and privilege escalation commands (e.g., `sudo`, `su`) — by parsing real system logs (`/var/log/auth.log`, `/var/log/secure`, or custom files).
+
+Originally created as a learning project to explore Python and system log parsing, LogGuard now serves as a solid base for anyone who wants to:
+- Understand how authentication events are logged on Linux
+- Build simple tools for threat detection or audit purposes
+- Practice Python coding in a real-world context
+
+The code is clean and modular, making it easy to extend or integrate into larger security tools.
+
+Key features:
+- Auto-detects system authentication logs
+- Supports custom log file paths
+- Detects failed SSH logins
+- Detects successful logins, sudo/su usage, statistical summary, export options
+
+<br>
+
+## Features
+
+<br>
+
+## Installation
+
+<br>
+
+## Usage & Demonstration
