@@ -28,12 +28,7 @@ Originally created as a learning project to explore Python and system log parsin
 - Practice Python coding in a real-world context
 
 The code is clean and modular, making it easy to extend or integrate into larger security tools.
-
-Key features:
-- Auto-detects system authentication logs
-- Supports custom log file paths
-- Detects failed SSH logins
-- Detects successful logins, sudo/su usage, statistical summary, export options
+<br>
 
 ## Features
 
