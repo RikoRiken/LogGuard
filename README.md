@@ -35,8 +35,6 @@ Key features:
 - Detects failed SSH logins
 - Detects successful logins, sudo/su usage, statistical summary, export options
 
-<br>
-
 ## Features
 
 <br>
