@@ -38,14 +38,12 @@ The code is clean and modular, making it easy to extend or integrate into larger
 - Parses SSH failed login attempts
 - Extracts timestamp, username, and source IP from log entries
 - Displays failed SSH login attempts in a readable format
+- Detection of successful SSH logins
 
 🛠️ **Work in progress**:
-- Detection of successful SSH logins
 - Detection of `sudo` and `su` usage (privilege escalation)
 - Summary statistics: attempts per IP, per user, per day
 - Export to JSON or CSV
-- Log file date filtering
-- Visual indicators (colors, severity levels)
 - HTML report generation (future)
 <br>
 
@@ -78,3 +76,5 @@ source /venv/bin/active
 <br>
 
 ## Usage & Demonstration
+
+⏳ *Incoming...*

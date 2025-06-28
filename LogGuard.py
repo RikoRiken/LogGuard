@@ -69,6 +69,33 @@ def extract_ssh_failures(log_path):
         for entry in failed_logins:
             print(f"[{entry[0]}] Failed login for user '{entry[1]}' from {entry[2]}")
 
+
+def extract_ssh_successes(log_path):
+    ssh_successes_pattern = re.compile(
+                r'(?P<date>\w{3} +\d{1,2} +\d{2}:\d{2}:\d{2}) .*sshd.*Accepted password for( invalid user)? (?P<user>\w+) from (?P<ip>\d+\.\d+\.\d+\.\d+)'
+    )
+
+    successful_logins = []
+
+    with open(log_path, 'r') as file:
+        for line in file:
+            match = ssh_successes_pattern.search(line)
+            if match:
+                date = match.group('date')
+                user = match.group('user')
+                ip = match.group('ip')
+                successful_logins.append((date, user, ip))
+
+    if not successful_logins:
+        print("✅ No successful SSH authentication found.")
+        return
+
+    else:
+        print(f"\n🔑 Detected {len(successful_logins)} successful SSH login attempts:\n")
+        for entry in successful_logins:
+            print(f"[{entry[0]}] Successful login for user '{entry[1]}' from {entry[2]}")
+
+
 def main():
     args = parse_arguments()
 
@@ -90,6 +117,8 @@ def main():
     print(f"📂 Analyzing log file: {log_path}\n")
 
     extract_ssh_failures(log_path)
+
+    extract_ssh_successes(log_path)
 
     print("\n🔍 Analysis complete. Review the output for any suspicious activity.\n")
 
