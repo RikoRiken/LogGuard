@@ -47,10 +47,10 @@ cd LogGuard
 2. **Run the tool**:
 ```bash
 python3 LogGuard.py
-```
 
-💡 *You can also specify a custom log file*:
-```bash
+
+💡 You can also specify a custom log file:
+
 python3 LogGuard.py --custom-log path/to/custom_file.log
 ```
 <br>
@@ -61,4 +61,5 @@ python3 -m venv venv
 source /venv/bin/active
 ```
 <br>
+
 ## Usage & Demonstration
