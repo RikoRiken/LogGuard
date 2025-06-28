@@ -32,6 +32,21 @@ The code is clean and modular, making it easy to extend or integrate into larger
 
 ## Features
 
+✅ **Current capabilities**:
+- Auto-detects standard Linux authentication logs (`/var/log/auth.log`, `/var/log/secure`)
+- Supports custom log file path with `--custom-log`
+- Parses SSH failed login attempts
+- Extracts timestamp, username, and source IP from log entries
+- Displays failed SSH login attempts in a readable format
+
+🛠️ **Work in progress**:
+- Detection of successful SSH logins
+- Detection of `sudo` and `su` usage (privilege escalation)
+- Summary statistics: attempts per IP, per user, per day
+- Export to JSON or CSV
+- Log file date filtering
+- Visual indicators (colors, severity levels)
+- HTML report generation (future)
 <br>
 
 ## Installation
@@ -49,7 +64,7 @@ cd LogGuard
 python3 LogGuard.py
 
 
-💡 You can also specify a custom log file:
+# 💡 You can also specify a custom log file:
 
 python3 LogGuard.py --custom-log path/to/custom_file.log
 ```
