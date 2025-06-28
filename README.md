@@ -42,19 +42,19 @@ The code is clean and modular, making it easy to extend or integrate into larger
 git clone https://github.com/RikoRiken/LogGuard.git
 cd LogGuard
 ```
-
 <br>
+
 2. **Run the tool**:
 ```bash
 python3 LogGuard.py
 ```
 
-  💡 *You can also specify a custom log file*:
-  ```bash
-  python3 LogGuard.py --custom-log path/to/custom_file.log
-  ```
-
+💡 *You can also specify a custom log file*:
+```bash
+python3 LogGuard.py --custom-log path/to/custom_file.log
+```
 <br>
+
 3. *(Optionnal)* **Create a virtual environment**:
 ```bash
 python3 -m venv venv
