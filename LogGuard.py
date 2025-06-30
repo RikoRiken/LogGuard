@@ -100,8 +100,7 @@ def analyse_privilege_escalation(log_path):
     )
 
     su_pattern = re.compile(
-                r'(?P<date>\w{3} +\d{1,2} +\d{2}:\d{2}:\d{2}) .*su\[\d+\]:.*?(?P<status>FAILED|Successful) su for (?P<target>\w+) by (?P<user>\w+)'
-
+                r'(?P<date>\w{3} +\d{1,2} +\d{2}:\d{2}:\d{2}) .*su:.*? for user (?P<target>\w+) by (?P<user>\w+)'
     )
 
     privilege_escalation_attempts = []
@@ -118,7 +117,7 @@ def analyse_privilege_escalation(log_path):
             su_match = su_pattern.search(line)
             if su_match:
                 date = su_match.group('date')
-                status = su_match.group('status')
+                status = "Successful" if "session opened" in line else "Failed"
                 target = su_match.group('target')
                 user = su_match.group('user')
                 privilege_escalation_attempts.append(("su", date, status, target, user))
@@ -127,14 +126,13 @@ def analyse_privilege_escalation(log_path):
         print("\n✅ No privilege escalation (su, sudo) attempts found.")
         return
 
-    print(f"\n🚨 Detected {len(privilege_escalation_attempts)} privilege escalation attempts:\n")
+    print(f"\n⛔️ Detected {len(privilege_escalation_attempts)} privilege escalation attempts:\n")
     
     for entry in privilege_escalation_attempts:
         if entry[0] == "sudo":
             print(f"[{entry[1]}] Sudo command executed by '{entry[2]}': {entry[3]}")
         elif entry[0] == "su":
-            status = "Successful" if entry[1] == "Successful" else "Failed"
-            print(f"[{entry[1]}] {status} su for '{entry[2]}' by '{entry[3]}'")
+            print(f"[{entry[1]}] {entry[2]} su for '{entry[3]}' by '{entry[4]}'")
 
 def main():
     args = parse_arguments()
