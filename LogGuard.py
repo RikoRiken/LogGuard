@@ -69,7 +69,6 @@ def extract_ssh_failures(log_path):
         for entry in failed_logins:
             print(f"[{entry[0]}] Failed login for user '{entry[1]}' from {entry[2]}")
 
-
 def extract_ssh_successes(log_path):
     ssh_successes_pattern = re.compile(
                 r'(?P<date>\w{3} +\d{1,2} +\d{2}:\d{2}:\d{2}) .*sshd.*Accepted password for( invalid user)? (?P<user>\w+) from (?P<ip>\d+\.\d+\.\d+\.\d+)'
@@ -95,6 +94,47 @@ def extract_ssh_successes(log_path):
         for entry in successful_logins:
             print(f"[{entry[0]}] Successful login for user '{entry[1]}' from {entry[2]}")
 
+def analyse_privilege_escalation(log_path):
+    sudo_pattern = re.compile(
+                r'(?P<date>\w{3} +\d{1,2} +\d{2}:\d{2}:\d{2}) .*sudo:.*?(?P<user>\w+).*COMMAND=(?P<cmd>.+)'
+    )
+
+    su_pattern = re.compile(
+                r'(?P<date>\w{3} +\d{1,2} +\d{2}:\d{2}:\d{2}) .*su\[\d+\]:.*?(?P<status>FAILED|Successful) su for (?P<target>\w+) by (?P<user>\w+)'
+
+    )
+
+    privilege_escalation_attempts = []
+
+    with open(log_path, 'r') as file:
+        for line in file:
+            sudo_match = sudo_pattern.search(line)
+            if sudo_match:
+                date = sudo_match.group('date')
+                user = sudo_match.group('user')
+                cmd = sudo_match.group('cmd')
+                privilege_escalation_attempts.append(("sudo", date, user, cmd))
+
+            su_match = su_pattern.search(line)
+            if su_match:
+                date = su_match.group('date')
+                status = su_match.group('status')
+                target = su_match.group('target')
+                user = su_match.group('user')
+                privilege_escalation_attempts.append(("su", date, status, target, user))
+
+    if not privilege_escalation_attempts:
+        print("\n✅ No privilege escalation (su, sudo) attempts found.")
+        return
+
+    print(f"\n🚨 Detected {len(privilege_escalation_attempts)} privilege escalation attempts:\n")
+    
+    for entry in privilege_escalation_attempts:
+        if entry[0] == "sudo":
+            print(f"[{entry[1]}] Sudo command executed by '{entry[2]}': {entry[3]}")
+        elif entry[0] == "su":
+            status = "Successful" if entry[1] == "Successful" else "Failed"
+            print(f"[{entry[1]}] {status} su for '{entry[2]}' by '{entry[3]}'")
 
 def main():
     args = parse_arguments()
@@ -120,11 +160,12 @@ def main():
 
     extract_ssh_successes(log_path)
 
+    analyse_privilege_escalation(log_path)
+
     print("\n🔍 Analysis complete. Review the output for any suspicious activity.\n")
 
 if __name__ == "__main__":
     show_banner()
     main()
 
-# TODO: Add sudo/su activity detection
 # TODO: Summarize statistics
