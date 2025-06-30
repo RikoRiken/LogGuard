@@ -40,9 +40,9 @@ The code is clean and modular, making it easy to extend or integrate into larger
 - Extracts timestamp, username, and source IP from log entries
 - Displays failed SSH login attempts in a readable format
 - Detection of successful SSH logins
+- Detection of `sudo` and `su` usage (privilege escalation)
 
 🛠️ **Work in progress**:
-- Detection of `sudo` and `su` usage (privilege escalation)
 - Summary statistics: attempts per IP, per user, per day
 - Export to JSON or CSV
 - HTML report generation (future)
