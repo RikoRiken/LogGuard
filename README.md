@@ -41,10 +41,11 @@ The code is clean and modular, making it easy to extend or integrate into larger
 - Displays failed SSH login attempts in a readable format
 - Detection of successful SSH logins
 - Detection of `sudo` and `su` usage (privilege escalation)
+- Export to `.txt` files
 
 🛠️ **Work in progress**:
 - Summary statistics: attempts per IP, per user, per day
-- Export to JSON or CSV
+- Export to JSON
 - HTML report generation (future)
 <br>
 
@@ -66,6 +67,11 @@ python3 LogGuard.py
 # 💡 You can also specify a custom log file:
 
 python3 LogGuard.py --custom-log path/to/custom_file.log
+
+
+# 💡 Or you can export to a .txt/.log file:
+
+python3 LogGuard.py --export-txt file_name.txt
 ```
 <br>
 
