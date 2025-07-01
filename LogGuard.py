@@ -39,9 +39,14 @@ def find_log_files():
 def parse_arguments():
     parser = argparse.ArgumentParser(description="LogGuard - Linux Authentication Log Analyzer")
     parser.add_argument("--custom-log", 
-                        metavar="",
+                        metavar="[PATH_TO_LOG]",
                         type=str, 
                         help="Path to a custom log file to analyze")
+    parser.add_argument("--export-txt",
+                        metavar="[FILE_NAME].txt",
+                        type=str,
+                        help="Export results to a text file with the specified name"
+                        )
     return parser.parse_args()
 
 def extract_ssh_failures(log_path):
@@ -69,6 +74,8 @@ def extract_ssh_failures(log_path):
         for entry in failed_logins:
             print(f"[{entry[0]}] Failed login for user '{entry[1]}' from {entry[2]}")
 
+    return failed_logins
+
 def extract_ssh_successes(log_path):
     ssh_successes_pattern = re.compile(
                 r'(?P<date>\w{3} +\d{1,2} +\d{2}:\d{2}:\d{2}) .*sshd.*Accepted password for( invalid user)? (?P<user>\w+) from (?P<ip>\d+\.\d+\.\d+\.\d+)'
@@ -93,6 +100,8 @@ def extract_ssh_successes(log_path):
         print(f"\n🔑 Detected {len(successful_logins)} successful SSH login attempts:\n")
         for entry in successful_logins:
             print(f"[{entry[0]}] Successful login for user '{entry[1]}' from {entry[2]}")
+
+    return successful_logins
 
 def analyse_privilege_escalation(log_path):
     sudo_pattern = re.compile(
@@ -134,6 +143,25 @@ def analyse_privilege_escalation(log_path):
         elif entry[0] == "su":
             print(f"[{entry[1]}] {entry[2]} su for '{entry[3]}' by '{entry[4]}'")
 
+    return privilege_escalation_attempts
+
+def export_results_txt(export_txt, failed_logins, successful_logins, privilege_escalation_attempts):
+    with open(export_txt, 'w') as file:
+        file.write("Failed SSH Logins:\n")
+        for entry in failed_logins:
+            file.write(f"[{entry[0]}] Failed login for user '{entry[1]}' from {entry[2]}\n")
+
+        file.write("\nSuccessful SSH Logins:\n")
+        for entry in successful_logins:
+            file.write(f"[{entry[0]}] Successful login for user '{entry[1]}' from {entry[2]}\n")
+
+        file.write("\nPrivilege Escalation Attempts:\n")
+        for entry in privilege_escalation_attempts:
+            if entry[0] == "sudo":
+                file.write(f"[{entry[1]}] Sudo command executed by '{entry[2]}': {entry[3]}\n")
+            elif entry[0] == "su":
+                file.write(f"[{entry[1]}] {entry[2]} su for '{entry[3]}' by '{entry[4]}'\n")
+
 def main():
     args = parse_arguments()
 
@@ -154,16 +182,22 @@ def main():
     
     print(f"📂 Analyzing log file: {log_path}\n")
 
-    extract_ssh_failures(log_path)
+    failed_logins = extract_ssh_failures(log_path)
 
-    extract_ssh_successes(log_path)
+    successful_logins = extract_ssh_successes(log_path)
 
-    analyse_privilege_escalation(log_path)
+    privilege_escalation_attempts = analyse_privilege_escalation(log_path)
 
     print("\n🔍 Analysis complete. Review the output for any suspicious activity.\n")
+
+    if args.export_txt:
+        print(f"✅ Exporting results to '{args.export_txt}'...\n")
+
+        export_results_txt(args.export_txt, failed_logins, successful_logins, privilege_escalation_attempts)
 
 if __name__ == "__main__":
     show_banner()
     main()
 
-# TODO: Summarize statistics
+# TODO: Add export to json?
+# TODO: Summarize statistics with web interface?
