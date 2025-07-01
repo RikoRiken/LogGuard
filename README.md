@@ -41,7 +41,7 @@ The code is clean and modular, making it easy to extend or integrate into larger
 - Displays failed SSH login attempts in a readable format
 - Detection of successful SSH logins
 - Detection of `sudo` and `su` usage (privilege escalation)
-- Export to `.txt` files
+- Export to `.txt` files with `--export-txt`
 
 🛠️ **Work in progress**:
 - Summary statistics: attempts per IP, per user, per day
