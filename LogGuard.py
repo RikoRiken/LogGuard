@@ -29,7 +29,7 @@ def find_log_files():
 
     for path in possible_paths:
         if os.path.isfile(path):
-            print (f"Log file detected: {path}")
+            print (f"ℹ️  Log file detected: {path}\n")
             return path
 
     print("❌ No standard authentication log files found.\n")
