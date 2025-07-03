@@ -1,0 +1,15 @@
+Jun 26 15:01:12 ubuntu sshd[12345]: Accepted password for admin from 192.168.1.5 port 52001 ssh2
+Jun 26 15:01:17 ubuntu sshd[12345]: Failed password for invalid user hacker from 10.0.0.3 port 52002 ssh2
+Jun 26 15:01:21 ubuntu sudo:    user01 : TTY=pts/1 ; PWD=/home/user01 ; USER=root ; COMMAND=/usr/bin/apt update
+Jun 26 15:01:33 ubuntu su: pam_unix(su:session): session opened for user root by user01(uid=1000)
+Jun 26 15:01:40 ubuntu sshd[12345]: Accepted password for user01 from 172.16.0.12 port 52003 ssh2
+Jun 26 15:02:12 ubuntu systemd-logind[1]: New session 45 of user user01.
+Jun 26 15:02:26 ubuntu login[54321]: LOGIN ON tty1 BY admin
+Jun 26 15:02:39 ubuntu sshd[12345]: Failed password for malicious from 203.0.113.15 port 52004 ssh2
+Jun 26 15:03:01 ubuntu sudo:    admin : TTY=pts/2 ; PWD=/home/admin ; USER=root ; COMMAND=/bin/systemctl restart ssh
+Jun 26 15:03:19 ubuntu su: pam_unix(su:session): session opened for user root by admin(uid=1000)
+Jun 26 15:03:27 ubuntu sshd[12345]: Accepted password for root from 192.168.1.100 port 52005 ssh2
+Jun 26 15:04:04 ubuntu sshd[12345]: Failed password for invalid user test from 10.10.10.10 port 52006 ssh2
+Jun 26 15:04:30 ubuntu sudo:    root : TTY=pts/3 ; PWD=/root ; USER=root ; COMMAND=/usr/bin/top
+Jun 26 15:04:41 ubuntu sshd[12345]: Accepted password for user02 from 10.0.0.5 port 52007 ssh2
+Jun 26 15:04:53 ubuntu su: pam_unix(su:session): session opened for user root by user02(uid=1000)
