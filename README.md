@@ -44,7 +44,6 @@ The code is clean and modular, making it easy to extend or integrate into larger
 - Export to `.txt` files with `--export-txt`
 
 🛠️ **Work in progress**:
-- Summary statistics: attempts per IP, per user, per day
 - Export to JSON
 - HTML report generation (future)
 <br>
@@ -96,10 +95,19 @@ ls -lah          # You need to see a file "auth.log" or "secure"
    Command = `python3 LogGuard.py`
 <img src="./assets/successful_automated_analysis.png">
 
+<br>
+
 2. Dangerous analysis reported on custom logs
 
     Command = `python3 LogGuard.py --custom-log logs_examples/example1_auth.log`
-<img src="./assets/...">
+<img src="./assets/Dangerous_custom-file_analysis.png">
 
-3. 
-⏳ *Incoming...*
+<br>
+
+3. Exporting results in `.txt` file
+
+    Command = `python3 LogGuard.py --export-txt log_analysis.txt`
+<img src="./assets/Dangerous_analysis_txt-export.png">
+<p align="center">
+<img src="./assets/exported_results-txt.png" width="50%" >
+</p>
