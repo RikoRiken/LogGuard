@@ -75,7 +75,7 @@ python3 LogGuard.py --export-txt file_name.txt
 ```
 <br>
 
-<h3 align="center"> ❗️ In case you don't have systems logs (`/var/log/auth.log` or `/var/log/secure`) in your system ❗️</h3>
+<h3 align="center"> ❗️ In case you don't have systems logs (/var/log/auth.log`) in your system ❗️</h3>
 
 Sometimes on Virtual Machines, `rsyslog` isn't installed, and so you'll note have the authentications logs like `/var/log/auth.log`. In case, executes the following (on debian-like):
 ```bash
