@@ -75,11 +75,18 @@ python3 LogGuard.py --export-txt file_name.txt
 ```
 <br>
 
-3. *(Optionnal)* **Create a virtual environment**:
+<h3 align="center"> ❗️ In case you don't have systems logs (`/var/log/auth.log` or `/var/log/secure`) in your system ❗️</h3>
+
+Sometimes on Virtual Machines, `rsyslog` isn't installed, and so you'll note have the authentications logs like `/var/log/auth.log`. In case, executes the following (on debian-like):
 ```bash
-python3 -m venv venv
-source /venv/bin/active
+sudo apt update && apt upgrade 
+
+sudo apt install rsyslog
+
+cd /var/log/ 
+ls -lah          # You need to see a file "auth.log" or "secure"
 ```
+
 <br>
 
 ## Usage & Demonstration
