@@ -91,4 +91,15 @@ ls -lah          # You need to see a file "auth.log" or "secure"
 
 ## Usage & Demonstration
 
+1. Successful Analysis with automaticaly captured log `/var/log/auth.log`
+
+   Command = `python3 LogGuard.py`
+<img src="./assets/successful_automated_analysis.png">
+
+2. Dangerous analysis reported on custom logs
+
+    Command = `python3 LogGuard.py --custom-log logs_examples/example1_auth.log`
+<img src="./assets/...">
+
+3. 
 ⏳ *Incoming...*
