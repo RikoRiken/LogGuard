@@ -127,7 +127,7 @@ crontab -e
 # 3️⃣ Execute LogGuard every hour 
 0 * * * * /usr/bin/python3 /absolute_path/to/logguard.py  --export-txt /path/to/logguard_report.txt   # (0 * * * * means: every minute 0 of each hours)
 
-# Verify your crontab is operational
+# 4️⃣ Verify that your crontab is operational
 crontab -l
 
 ```
