@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # LogGuard v1.0 - Linux Authentication Log Analyzer
 
 import os
