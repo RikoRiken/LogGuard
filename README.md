@@ -46,7 +46,7 @@ The code is clean and modular, making it easy to extend or integrate into larger
 
 🛠️ **Work in progress**:
 - Export to JSON
-- HTML report generation (future)
+- HTML report generation
 <br>
 
 ## Installation
