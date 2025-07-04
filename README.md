@@ -11,7 +11,8 @@ Its primary goal is to help identify suspicious login attempts, unauthorized acc
   <a href="#description">Description</a> •
   <a href="#features">Features</a> •
   <a href="#installation">Installation</a> •
-  <a href="#usage--demonstration">Usage & Demonstration</a>
+  <a href="#demonstration">Demonstration</a> •
+  <a href="#crontab">Crontab</a>
 </p>
 
 <br>
@@ -64,12 +65,10 @@ python3 LogGuard.py
 
 
 # 💡 You can also specify a custom log file:
-
 python3 LogGuard.py --custom-log path/to/custom_file.log
 
 
 # 💡 Or you can export to a .txt/.log file:
-
 python3 LogGuard.py --export-txt file_name.txt
 ```
 <br>
@@ -88,7 +87,7 @@ ls -lah          # You need to see a file "auth.log" or "secure"
 
 <br>
 
-## Usage & Demonstration
+## Demonstration
 
 1. Successful Analysis with automaticaly captured log `/var/log/auth.log`
 
@@ -111,3 +110,24 @@ ls -lah          # You need to see a file "auth.log" or "secure"
 <p align="center">
 <img src="./assets/exported_results-txt.png" width="50%" >
 </p>
+
+<br>
+
+## Crontab
+
+**Automation:** You can planify a regular execution of LogGuard with `Crontab` in linux, to automaticaly analyse the log files of your system.
+
+```bash 
+# 1️⃣ Add execution binary to script
+sudo chmod +x /path/to/LogGuard.py
+
+# 2️⃣ Edit crontab of current user 
+crontab -e
+
+# 3️⃣ Execute LogGuard every hour 
+0 * * * * /usr/bin/python3 /absolute_path/to/logguard.py  --export-txt /path/to/logguard_report.txt   # (0 * * * * means: every minute 0 of each hours)
+
+# Verify your crontab is operational
+crontab -l
+
+```
