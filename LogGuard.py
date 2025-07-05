@@ -147,7 +147,12 @@ def analyse_privilege_escalation(log_path):
     return privilege_escalation_attempts
 
 def export_results_txt(export_txt, failed_logins, successful_logins, privilege_escalation_attempts):
-    with open(export_txt, 'w') as file:
+    output_dir = "output"
+    os.makedirs(output_dir, exist_ok=True)  # Crée le dossier s’il n’existe pas
+
+    export_path = os.path.join(output_dir, export_txt)
+
+    with open(f'{export_path}', 'w') as file:
         file.write("Failed SSH Logins:\n")
         for entry in failed_logins:
             file.write(f"[{entry[0]}] Failed login for user '{entry[1]}' from {entry[2]}\n")
@@ -192,9 +197,9 @@ def main():
     print("\n🔍 Analysis complete. Review the output for any suspicious activity.\n")
 
     if args.export_txt:
-        print(f"✅ Exporting results to '{args.export_txt}'...\n")
+        print(f"✅ Exporting results to 'output/{args.export_txt}'...\n")
 
-        export_results_txt(args.export_txt, failed_logins, successful_logins, privilege_escalation_attempts)
+        export_results_txt(f'{args.export_txt}', failed_logins, successful_logins, privilege_escalation_attempts)
 
 if __name__ == "__main__":
     show_banner()

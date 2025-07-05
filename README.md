@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="./assets/LogGuard-logo.png">
+    <img src="./assets/README_img/LogGuard-logo.png">
 </h1>
 
 <p align="center">
@@ -92,23 +92,23 @@ ls -lah          # You need to see a file "auth.log" or "secure"
 1. Successful Analysis with automaticaly captured log `/var/log/auth.log`
 
    Command = `python3 LogGuard.py`
-<img src="./assets/successful_automated_analysis.png">
+<img src="./assets/README_img/successful_automated_analysis.png">
 
 <br>
 
 2. Dangerous analysis reported on custom logs
 
     Command = `python3 LogGuard.py --custom-log logs_examples/example1_auth.log`
-<img src="./assets/Dangerous_custom-file_analysis.png">
+<img src="./assets/README_img/Dangerous_custom-file_analysis.png">
 
 <br>
 
 3. Exporting results in `.txt` file
 
     Command = `python3 LogGuard.py --export-txt log_analysis.txt`
-<img src="./assets/Dangerous_analysis_txt-export.png">
+<img src="./assets/README_img/Dangerous_analysis_txt-export.png">
 <p align="center">
-<img src="./assets/exported_results-txt.png" width="50%" >
+<img src="./assets/README_img/exported_results-txt.png" width="50%" >
 </p>
 
 <br>
