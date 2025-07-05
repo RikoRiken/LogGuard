@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
+
 # LogGuard v1.0 - Linux Authentication Log Analyzer
 
+from jinja2 import Environment, FileSystemLoader
 import os
 import argparse
 import re
@@ -48,6 +50,11 @@ def parse_arguments():
                         type=str,
                         help="Export results to a text file with the specified name"
                         )
+    parser.add_argument("--export-html",
+                       metavar="[FILE_NAME].html",
+                       type=str,
+                       help="Export and open results to an HTML file with the specified name"
+                       )
     return parser.parse_args()
 
 def extract_ssh_failures(log_path):
@@ -148,7 +155,7 @@ def analyse_privilege_escalation(log_path):
 
 def export_results_txt(export_txt, failed_logins, successful_logins, privilege_escalation_attempts):
     output_dir = "output"
-    os.makedirs(output_dir, exist_ok=True)  # Crée le dossier s’il n’existe pas
+    os.makedirs(output_dir, exist_ok=True)  # Create dir if doesn't exist
 
     export_path = os.path.join(output_dir, export_txt)
 
@@ -167,6 +174,24 @@ def export_results_txt(export_txt, failed_logins, successful_logins, privilege_e
                 file.write(f"[{entry[1]}] Sudo command executed by '{entry[2]}': {entry[3]}\n")
             elif entry[0] == "su":
                 file.write(f"[{entry[1]}] {entry[2]} su for '{entry[3]}' by '{entry[4]}'\n")
+
+def export_results_html(export_html, failed_logins, successful_logins, privilege_escalation_attempts):
+    output_dir = "output"
+    os.makedirs(output_dir, exist_ok=True)  # Create dir if doesn't exist
+
+    export_path = os.path.join(output_dir, export_html)
+
+    env = Environment(loader=FileSystemLoader("assets"))
+    template = env.get_template("report_template.html")
+
+    with open(export_path, 'w') as file:
+        file.write(template.render(
+            failed_logins=failed_logins,
+            successful_logins=successful_logins,
+            privilege_escalation_attempts=privilege_escalation_attempts
+        ))
+    import webbrowser
+    webbrowser.open(f"file://{os.path.abspath(export_path)}")
 
 def main():
     args = parse_arguments()
@@ -200,10 +225,14 @@ def main():
         print(f"✅ Exporting results to 'output/{args.export_txt}'...\n")
 
         export_results_txt(f'{args.export_txt}', failed_logins, successful_logins, privilege_escalation_attempts)
+    
+    if args.export_html:
+        print(f"✅ Exporting results to 'output/{args.export_html}'...\n")
+
+        export_results_html(f'{args.export_html}', failed_logins, successful_logins, privilege_escalation_attempts)
 
 if __name__ == "__main__":
     show_banner()
     main()
 
 # TODO: Add export to json?
-# TODO: Summarize statistics with web interface?
