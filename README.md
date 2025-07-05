@@ -43,10 +43,11 @@ The code is clean and modular, making it easy to extend or integrate into larger
 - Detection of successful SSH logins
 - Detection of `sudo` and `su` usage (privilege escalation)
 - Export to `.txt` files with `--export-txt`
+- HTML report generation with `--export-html`
 
 🛠️ **Work in progress**:
 - Export to JSON
-- HTML report generation
+
 <br>
 
 ## Installation
@@ -109,6 +110,16 @@ ls -lah          # You need to see a file "auth.log" or "secure"
 <img src="./assets/README_img/Dangerous_analysis_txt-export.png">
 <p align="center">
 <img src="./assets/README_img/exported_results-txt.png" width="50%" >
+</p>
+
+<br>
+
+4. Exporting and automaticaly opening results in `.html` file
+
+    Command = `python3 LogGuard.py --export-html log_analysis.html`
+<img src="./assets/README_img/Dangerous_analysis_html-export.png">
+<p align="center">
+<img src="./assets/README_img/exported_results-html.png" width="67%" >
 </p>
 
 <br>
