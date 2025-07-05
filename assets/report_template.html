@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogGuard - Analysis Report</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h1>LogGuard - Authentication Log Report</h1>
+
+    <div class="section">
+        <h2>🚨 Failed SSH Logins</h2>
+        {% for entry in failed_logins %}
+            <div class="entry">[{{ entry[0] }}] Failed login for user '{{ entry[1] }}' from {{ entry[2] }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2>🔑 Successful SSH Logins</h2>
+        {% for entry in successful_logins %}
+            <div class="entry">[{{ entry[0] }}] Successful login for user '{{ entry[1] }}' from {{ entry[2] }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2>⛔ Privilege Escalation Attempts</h2>
+        {% for entry in privilege_escalation_attempts %}
+            {% if entry[0] == 'sudo' %}
+                <div class="entry">[{{ entry[1] }}] Sudo command executed by '{{ entry[2] }}': {{ entry[3] }}</div>
+            {% elif entry[0] == 'su' %}
+                <div class="entry">[{{ entry[1] }}] {{ entry[2] }} su for '{{ entry[3] }}' by '{{ entry[4] }}'</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</body>
+</html>
