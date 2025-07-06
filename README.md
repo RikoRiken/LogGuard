@@ -43,10 +43,12 @@ The code is clean and modular, making it easy to extend or integrate into larger
 - Detection of successful SSH logins
 - Detection of `sudo` and `su` usage (privilege escalation)
 - Export to `.txt` files with `--export-txt`
-- HTML report generation with `--export-html`
+- HTML report `.html` generation with `--export-html`
+
 
 🛠️ **Work in progress**:
 - Export to JSON
+- Add interactive web app to parse results
 
 <br>
 
@@ -71,12 +73,16 @@ python3 LogGuard.py --custom-log path/to/custom_file.log
 
 # 💡 Or you can export to a .txt/.log file:
 python3 LogGuard.py --export-txt file_name.txt
+
+
+# 💡 And you can export and open automaticaly to a .html file:
+python3 LogGuard.py --export-html file_name.html
 ```
 <br>
 
 <h3 align="center"> ❗️ In case you don't have systems logs (/var/log/auth.log`) in your system ❗️</h3>
 
-Sometimes on Virtual Machines, `rsyslog` isn't installed, and so you'll note have the authentications logs like `/var/log/auth.log`. In case, executes the following (on debian-like):
+Sometimes on Virtual Machines, `rsyslog` isn't installed, and so you'll note have the authentications logs like `/var/log/auth.log`. In case, executes the following (on debian-like distros):
 ```bash
 sudo apt update && apt upgrade 
 
